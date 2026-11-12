@@ -2,7 +2,7 @@
 
 # Blender Setup Script for HPC Cluster 
 # (NOTE: need to convert for 5.2 LTS!)
-# This script loads all necessary modules and sets up the environmentto run Blender in headless mode on the cluster
+# This script loads all necessary modules and sets up the environment to run Blender in headless mode on the cluster
 
 echo "Setting up Blender environment..."
 
@@ -20,14 +20,19 @@ echo "Modules loaded successfully."
 # Set up library paths
 echo "Setting up library paths..."
 
+# --> potential file paths for stuff
+# libxrender-0.9.12-kxsfsssumndrbzq6b5mrrj2uxnxce6eg
+# libxrender-0.9.12-oa2ftjcegn4ognf7qz33jttrbgwmc33y
+# libxrender-0.9.12-uolsbnwrlcqwodd55lbc6si6cu3rx2pe
+
 # Add libXrender library path
 export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-x86_64/libxrender-0.9.12-uolsbnwrlcqwodd55lbc6si6cu3rx2pe/lib:$LD_LIBRARY_PATH"
 
 # Add libXfixes library path
-export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu24.04-x86_64/gcc-13.2.0/libxfixes-5.0.3-x776t2yf6u5cpzzfhrmuparlsq262u6f/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-13.2.0/libxfixes-5.0.3-x776t2yf6u5cpzzfhrmuparlsq262u6f/lib:$LD_LIBRARY_PATH"
 
 # Add libXi library path
-export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu24.04-x86_64/gcc-13.2.0/libxi-1.7.10-yliyie6bpifieikysurgqkg6drloc5as/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-13.2.0/libxi-1.7.10-yliyie6bpifieikysurgqkg6drloc5as/lib:$LD_LIBRARY_PATH"
 
 # Add libxkbcommon library path
 export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu24.04-x86_64/gcc-13.2.0/libxkbcommon-1.7.0-uchgu4dmtvnz35dqv6cfudl2i36cn2hs/lib:$LD_LIBRARY_PATH"
@@ -41,8 +46,8 @@ export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu24.04-x86_64/gcc-
 echo "Library paths configured."
 
 # Navigate to Blender directory
-# SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# BLENDER_DIR="~/blender-5.2.3-linux-x64"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BLENDER_DIR="/home/kmherbstzuber/blender-5.2.3-linux-x64"
 cd /home/kmherbstzuber/blender-5.2.3-linux-x64
 
 echo "Environment setup complete!"
