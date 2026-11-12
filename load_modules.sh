@@ -41,9 +41,9 @@ export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu24.04-x86_64/gcc-
 echo "Library paths configured."
 
 # Navigate to Blender directory
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BLENDER_DIR="/blender-5.2.3-linux-x64"
-cd "$BLENDER_DIR"
+# SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# BLENDER_DIR="~/blender-5.2.3-linux-x64"
+cd /home/kmherbstzuber/blender-5.2.3-linux-x64
 
 echo "Environment setup complete!"
 echo "You can now run Blender with: ./blender --background [options]"
