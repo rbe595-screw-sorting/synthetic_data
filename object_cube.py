@@ -5,6 +5,7 @@ import random
 import numpy as np
 from mathutils import Vector
 
+
 def delete_collection_objects(name):
     for object in bpy.data.collections[name].objects:
         bpy.data.objects.remove(object)
@@ -121,7 +122,6 @@ def randomize_hdri(folder):
         if filename.lower().endswith((".hdr", ".exr"))
     ]
 
-    
     # if no HDRI files are found
     if not hdri_paths:
         raise RuntimeError("No .hdr or .exr files found")
@@ -159,7 +159,9 @@ def randomize_hdri(folder):
     
     return str(path)
         
-def random_camera(camera, radius):
+def random_camera(camera_name, radius):
+
+    camera = bpy.data.objects[camera_name]
     
     # random location on a sphere
     z = random.uniform(-1.0, 1.0)
@@ -169,7 +171,7 @@ def random_camera(camera, radius):
     direction = Vector((
         horizontal * math.cos(angle),
         horizontal * math.sin(angle),
-        z,
+        z
     ))
 
     camera.location = direction * radius
@@ -196,30 +198,3 @@ def render(output_folder, filename, cycles=False):
 
     bpy.ops.render.render(write_still=True)
      
-# ----------- constants -----------
-HDRI_FOLDER = "/home/kmherbstzuber/synthetic_data/hdri"
-SAVE_FOLDER = "/home/kmherbstzuber/synthetic_data/renders"
-
-# ----------- functional code -----------
-for i in range(200):
-    delete_collection_objects("hardware") # remove previously generated objects
-    names = ['screw', 'spacer', 'nylock_nut', 'bearing_a'] # names of objects
-
-    num_objects = random.randint(0, 50)
-
-    # generate the object cube
-    random_cube(0.5, names, num_objects, collection='hardware')
-
-    # set background
-    randomize_hdri(HDRI_FOLDER)
-
-    # camera + lighting 
-    randomize_light("spot_white", 2.0, False)
-    randomize_light("spot_color", 1.0, True)
-
-    # view
-    random_camera(bpy.data.objects["Camera"], 0.5)
-
-    # render
-    render(SAVE_FOLDER, "test_render", cycles=True)
-
