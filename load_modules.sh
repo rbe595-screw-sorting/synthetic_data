@@ -42,7 +42,7 @@ echo "Library paths configured."
 
 # Navigate to Blender directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BLENDER_DIR="$SCRIPT_DIR/blender-5.2..3-linux-x64"
+BLENDER_DIR="$SCRIPT_DIR/blender-5.2.3-linux-x64"
 cd "$BLENDER_DIR"
 
 echo "Environment setup complete!"
