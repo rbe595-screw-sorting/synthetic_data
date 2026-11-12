@@ -197,32 +197,29 @@ def render(output_folder, filename, cycles=False):
     bpy.ops.render.render(write_still=True)
      
 # ----------- constants -----------
-HDRI_FOLDER = "/home/kymadogg/rbe595/hdri"
-SAVE_FOLDER = "/home/kymadogg/rbe595/renders"
-
-# constants
-UPPER = 0.25 
-LOWER = -0.25
-NUMBER = 25
+HDRI_FOLDER = "/home/kmherbstzuber/synthetic_data/hdri"
+SAVE_FOLDER = "/home/kmherbstzuber/synthetic_data/renders"
 
 # ----------- functional code -----------
+for i in range(200):
+    delete_collection_objects("hardware") # remove previously generated objects
+    names = ['screw', 'spacer', 'nylock_nut', 'bearing_a'] # names of objects
 
-delete_collection_objects("hardware") # remove previously generated objects
-names = ['screw', 'spacer', 'nylock_nut', 'bearing_a'] # names of objects
+    num_objects = random.randint(0, 50)
 
-# generate the object cube
-random_cube(0.5, names, 10, collection='hardware')
+    # generate the object cube
+    random_cube(0.5, names, num_objects, collection='hardware')
 
-# set background
-randomize_hdri(HDRI_FOLDER)
+    # set background
+    randomize_hdri(HDRI_FOLDER)
 
-# camera + lighting 
-randomize_light("spot_white", 2.0, False)
-randomize_light("spot_color", 1.0, True)
+    # camera + lighting 
+    randomize_light("spot_white", 2.0, False)
+    randomize_light("spot_color", 1.0, True)
 
-# view
-random_camera(bpy.data.objects["Camera"], 0.5)
+    # view
+    random_camera(bpy.data.objects["Camera"], 0.5)
 
-# render
-render(SAVE_FOLDER, "test_render", cycles=True)
+    # render
+    render(SAVE_FOLDER, "test_render", cycles=True)
 
