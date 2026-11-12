@@ -1,0 +1,11 @@
+[project]
+name = "synthetic-data"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "gdown>=6.5.1",
+    "mathutils>=5.1.0",
+    "numpy>=2.5.4",
+]
