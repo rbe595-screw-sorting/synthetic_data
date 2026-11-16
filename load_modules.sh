@@ -43,7 +43,7 @@ echo "Library paths configured."
 # Navigate to Blender directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BLENDER_DIR="$SCRIPT_DIR/blender-4.5.3-linux-x64"
-cd "$BLENDER_DIR"
+cd /home/kmherbstzuber/blender-4.5.3-linux-x64/
 
 echo "Environment setup complete!"
 echo "You can now run Blender with: ./blender --background [options]"
