@@ -6,7 +6,7 @@ def init():
     parser = argparse.ArgumentParser(
         prog='synthetic data generation',
         description='randomly renders a lot of stuff')
-    parser.add_argument('-d', '--directory', type=str, default=0, help='base location of files')
+    parser.add_argument('-d', '--directory', type=str, default="/home/kmherbstzuber", help='base location of files')
     parser.add_argument('-n', '--filename', type=str, default='render', help='base file name to use')
     parser.add_argument('--renders', type=int, help='number of scenes to render')
     # parser.add_argument('--gpu', type=int, default=0, help='gpu number (if you want to run multiple jobs)')
