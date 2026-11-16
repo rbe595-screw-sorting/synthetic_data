@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Blender Setup Script for HPC Cluster 
-# (NOTE: need to convert for 5.2 LTS!)
-# This script loads all necessary modules and sets up the environment to run Blender in headless mode on the cluster
+# Blender Setup Script for HPC Cluster
+# This script loads all necessary modules and sets up the environment
+# to run Blender in headless mode on the cluster
 
 echo "Setting up Blender environment..."
 
@@ -20,11 +20,6 @@ echo "Modules loaded successfully."
 # Set up library paths
 echo "Setting up library paths..."
 
-# --> potential file paths for stuff
-# libxrender-0.9.12-kxsfsssumndrbzq6b5mrrj2uxnxce6eg
-# libxrender-0.9.12-oa2ftjcegn4ognf7qz33jttrbgwmc33y
-# libxrender-0.9.12-uolsbnwrlcqwodd55lbc6si6cu3rx2pe
-
 # Add libXrender library path
 export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-x86_64/libxrender-0.9.12-uolsbnwrlcqwodd55lbc6si6cu3rx2pe/lib:$LD_LIBRARY_PATH"
 
@@ -35,43 +30,39 @@ export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-
 export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-13.2.0/libxi-1.7.10-yliyie6bpifieikysurgqkg6drloc5as/lib:$LD_LIBRARY_PATH"
 
 # Add libxkbcommon library path
-export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu24.04-x86_64/gcc-13.2.0/libxkbcommon-1.7.0-uchgu4dmtvnz35dqv6cfudl2i36cn2hs/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-13.2.0/libxkbcommon-1.7.0-uchgu4dmtvnz35dqv6cfudl2i36cn2hs/lib:$LD_LIBRARY_PATH"
 
 # Add Mesa (OpenGL) library path
 export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-x86_64/mesa-25.0.5-rclmohiaitjskxy2qh4gqxqi2wt5hv75/lib:$LD_LIBRARY_PATH"
 
 # Add GCC library path for newer libstdc++
-export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu24.04-x86_64/gcc-13.2.0/gcc-15.1.0-hgqgy4pz47kszzww4vzvxsxbriahfcor/lib64:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-13.2.0/gcc-15.1.0-hgqgy4pz47kszzww4vzvxsxbriahfcor/lib64:$LD_LIBRARY_PATH"
 
 echo "Library paths configured."
 
 # Navigate to Blender directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BLENDER_DIR="/home/kmherbstzuber/blender-5.2.3-linux-x64"
-cd /home/kmherbstzuber/blender-5.2.3-linux-x64
+BLENDER_DIR="$SCRIPT_DIR/blender-4.5.3-linux-x64"
+cd "$BLENDER_DIR"
 
 echo "Environment setup complete!"
+echo "You can now run Blender with: ./blender --background [options]"
+echo "Current directory: $(pwd)"
+echo ""
+echo "Example commands:"
+echo "  ./blender --background --version"
+echo "  ./blender --background --help"
+echo "  ./blender --background your_file.blend --render-frame 1"
+echo ""
 
 # Test if Blender works
 echo "Testing Blender..."
 if ./blender --background --version > /dev/null 2>&1; then
     echo "✅ Blender is working correctly!"
     echo ""
-    echo "You can now run Blender with: ./blender --background [options]"
-    echo ""
-    echo "Example commands:"
-    echo "  ./blender --background --version"
-    echo "  ./blender --background --help"
-    echo "  ./blender --background your_file.blend --render-frame 1"
-    echo ""
     echo "🔧 USAGE: To use this environment, run 'source ./setup_blender.sh' instead of './setup_blender.sh'"
     echo "   This will keep the environment and directory changes in your current shell."
-    echo ""
 else
-    echo "❌ Blender setup failed."
-    ldd ./blender | grep "not found"
+    echo "❌ Blender setup failed. Please check the error messages above."
     return 1
 fi
-
-# export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-13.2.0/libxfixes-5.0.3-x776t2yf6u5cpzzfhrmuparlsq262u6f/lib:/cm/shared/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-13.2.0/libxi-1.7.10-uob5j2gimkjee4ubeyqaxped37izpbae/lib:$LD_LIBRARY_PATH"
-# export LD_LIBRARY_PATH="/cm/shared/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-13.2.0/libxkbcommon-1.7.0-5zdbzuelx2efjo4dgbz4g44lt4hpq3t7/lib:$LD_LIBRARY_PATH"
